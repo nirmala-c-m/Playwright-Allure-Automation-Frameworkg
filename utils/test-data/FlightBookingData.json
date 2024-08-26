@@ -1,0 +1,52 @@
+{
+    "flyingFrom": "cok",
+    "flyingFromFull": "Cochin International Airport",
+    "flyingTo": "dxb",
+    "flyingToFull": "Dubai, United Arab Emirates",
+    "targetDate": "Fri Aug 30",
+    "targetDay": "25",
+    "firstName": "nirmala",
+    "lastName": "C",
+    "countryCode": "35",
+    "mobileNumber": "8088461052",
+    "email": "nirmalallll@gmail.com",
+    "passengers": [
+      {
+        "firstName": "Babu",
+        "lastName": "Nair",
+        "dateOfBirth": "1980-12-26",
+        "nationality": "India",
+        "passportId": "Mjdg2321321",
+        "passportExpiry": "2028-12-22",
+        "gender": "Male"
+      },
+      {
+        "firstName": "Nirmala",
+        "lastName": "C",
+        "dateOfBirth": "1980-09-22",
+        "nationality": "India",
+        "passportId": "Njydg34342",
+        "passportExpiry": "2032-09-29",
+        "gender": "Female"
+      },
+      {
+        "firstName": "Madhav",
+        "lastName": "Babu",
+        "dateOfBirth": "2010-11-11",
+        "nationality": "India",
+        "passportId": "KL10erte432",
+        "passportExpiry": "2028-12-12",
+        "gender": "Male"
+      },
+      {
+        "firstName": "Keshav",
+        "lastName": "Babu",
+        "dateOfBirth": "2020-05-17",
+        "nationality": "India",
+        "passportId": "KL10dsd24224",
+        "passportExpiry": "2028-12-12",
+        "gender": "Male"
+      }
+    ]
+  }
+  

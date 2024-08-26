@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","200082","Booking Flight using Agoda","","Mon Aug 26 19:35:24 IST 2024","broken","Mon Aug 26 19:38:44 IST 2024","","02_HotelBooking.spec.js","",""
+"","200067","Booking Flight using Agoda","","Mon Aug 26 19:35:24 IST 2024","broken","Mon Aug 26 19:38:44 IST 2024","","03_FlightBooking.spec.js","",""
+"","67278","test","","Mon Aug 26 19:35:24 IST 2024","passed","Mon Aug 26 19:36:31 IST 2024","","01_LoginToApplication.spec.js","",""

@@ -1,0 +1,111 @@
+// import { test, expect } from '@playwright/test';
+// const { LoginPage } = require('../Pages/LoginPage');
+
+// test('Booking Flight using Agoda', async ({ page }) => {
+//   await page.context().tracing.start({ screenshots: true, snapshots: true });
+//   await page.goto('https://www.agoda.com/en-gb/');
+
+//   //close the popup
+//   await page.waitForLoadState('networkidle');
+//   const elem = await page.waitForSelector("//*[text()='No thanks']", { timeout: 5000 }).catch(() => null);
+//   if (elem) {
+//     await elem.click();
+//   }
+//   await page.fill("//input[@aria-label='Enter a destination or property']", "Dubai");
+//   await page.getByLabel('United Arab Emirates').nth(1).click();
+
+//   const startDate = 'Sun Aug 25 2024 Green: Price';
+//   const endDate = 'Sat Sep 07';
+//   await page.getByLabel(startDate).getByRole('button').click();
+//   await page.getByLabel(endDate).getByRole('button').click();
+
+//   await page.locator('div').filter({ hasText: /^ChildrenAges 0-170$/ }).getByLabel('Add').click();
+//   await page.locator('div').filter({ hasText: /^ChildAges 0-171$/ }).getByLabel('Add').click();
+
+//   await page.locator('.ficon.DropdownInput__icon.ficon-10.ficon-desktop-ic-black-down').nth(0).scrollIntoViewIfNeeded();
+//   await page.locator('.ficon.DropdownInput__icon.ficon-10.ficon-desktop-ic-black-down').nth(0).click({ force: true });
+//   const firstKidsAge = "3";
+//   await page.locator('.DropdownInput__box').nth(0).selectOption({ value: firstKidsAge });
+//   await page.locator('.ficon.DropdownInput__icon.ficon-10.ficon-desktop-ic-black-down').nth(1).scrollIntoViewIfNeeded();
+//   await page.locator('.ficon.DropdownInput__icon.ficon-10.ficon-desktop-ic-black-down').nth(1).click({ force: true });
+//   const secondKidsAge = "7";
+//   await page.locator('.DropdownInput__box').nth(1).selectOption({ value: secondKidsAge });
+
+//   const [newPage] = await Promise.all
+//     ([
+//       page.waitForEvent('popup'),  // New tab opening
+//       page.locator('[data-test="SearchButtonBox"]').click()
+//     ]);
+
+//   await newPage.locator('//div[text()="Top reviewed"]').waitFor('visible', { timeout: 6000 });
+//   await page.pause();
+//   const hotelElements = page.locator('#searchPageRightColumn .PropertyCard__Container .dynamic-style-typographystyle-5.a234d-a234d-box.a234d-inline.a234d-m-none');
+//   const count = await hotelElements.count();
+
+//   for (let i = 0; i < count; i++) 
+//     {
+//     const hotelName = await hotelElements.nth(i).textContent();
+//     if (hotelName.trim() === 'Novotel Al Barsha Hotel') 
+//       {
+//       await hotelElements.nth(i).click();
+//       break;
+//       }
+//     }
+//   await page.context().tracing.stop({ path: 'trace.zip' });
+
+// });
+import { test, expect } from '@playwright/test';
+import fs from 'fs';
+
+test('Booking Flight using Agoda', async ({ page }) => {
+
+  const data = JSON.parse(fs.readFileSync('/home/nirmala/Playwright/utils/test-data/BookingData.json', 'utf-8'));
+  await page.context().tracing.start({ screenshots: true, snapshots: true });
+  await page.goto('https://www.agoda.com/en-gb/');
+
+  // Close the popup
+  await page.waitForLoadState('networkidle');
+  const elem = await page.waitForSelector("//*[text()='No thanks']", { timeout: 5000 }).catch(() => null);
+  if (elem) {
+    await elem.click();
+  }
+
+  // Use parameters from the JSON file
+  await page.fill("//input[@aria-label='Enter a destination or property']", data.destination);
+  await page.getByLabel(data.countryLabel).nth(1).click();
+
+  await page.getByLabel(data.startDate).getByRole('button').click();
+  await page.getByLabel(data.endDate).getByRole('button').click();
+
+  await page.locator('div').filter({ hasText: /^ChildrenAges 0-170$/ }).getByLabel('Add').click();
+  await page.locator('div').filter({ hasText: /^ChildAges 0-171$/ }).getByLabel('Add').click();
+
+  await page.locator('.ficon.DropdownInput__icon.ficon-10.ficon-desktop-ic-black-down').nth(0).scrollIntoViewIfNeeded();
+  await page.locator('.ficon.DropdownInput__icon.ficon-10.ficon-desktop-ic-black-down').nth(0).click({ force: true });
+  await page.locator('.DropdownInput__box').nth(0).selectOption({ value: data.firstKidsAge });
+  
+  await page.locator('.ficon.DropdownInput__icon.ficon-10.ficon-desktop-ic-black-down').nth(1).scrollIntoViewIfNeeded();
+  await page.locator('.ficon.DropdownInput__icon.ficon-10.ficon-desktop-ic-black-down').nth(1).click({ force: true });
+  await page.locator('.DropdownInput__box').nth(1).selectOption({ value: data.secondKidsAge });
+
+  const [newPage] = await Promise.all([
+    page.waitForEvent('popup'),  // New tab opening
+    page.locator('[data-test="SearchButtonBox"]').click()
+  ]);
+
+  await newPage.locator('//div[text()="Top reviewed"]').waitFor('visible', { timeout: 6000 });
+  await page.pause();
+
+  const hotelElements = page.locator('#searchPageRightColumn .PropertyCard__Container .dynamic-style-typographystyle-5.a234d-a234d-box.a234d-inline.a234d-m-none');
+  const count = await hotelElements.count();
+
+  for (let i = 0; i < count; i++) {
+    const hotelName = await hotelElements.nth(i).textContent();
+    if (hotelName.trim() === data.hotelName) {
+      await hotelElements.nth(i).click();
+      break;
+    }
+  }
+
+  await page.context().tracing.stop({ path: 'trace.zip' });
+});
