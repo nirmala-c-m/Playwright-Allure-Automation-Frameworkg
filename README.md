@@ -11,7 +11,7 @@ https://www.agoda.com/
 * JavaScript with Page Object Model (POM): Organize your test code using the POM pattern to enhance code reusability and maintainability.
 * Parallel Execution: Supports running tests in parallel for faster feedback.
 * Customizable Test Configurations: Tailor your test runs with different options, including retries, headless mode, and trace collection
-* 
+  
 ## Note
 * Configuration File: The playwright.config.js file is designed for easy test management. The config allows for setting timeouts, parallel execution, and other parameters.
 * Allure Reporting Setup: The framework is set up to automatically generate and open Allure reports after test execution.
@@ -103,7 +103,18 @@ Commonly used built-in reporters:
 
 cucumber-html-reporter is more npm trendier than other reporters like allure reporter etc. thats why i choose this reporter.
 
+## Why and why Not
+* OOPS, used in framework 
+* Design pattern used
+	* Added factory design pattern in the framework - selecting the browser mechanism
+	* DI injection in Test context
+* No need to put the locators in exec or properties file because it's not efficient, if we implement such ecosystem we have to create and maintain separate files and related class to maintain that ecosystem which is an overkill
 
+## Feature need to add
+* dockerized the framework
+	* https://codefresh.io/blog/not-ignore-dockerignore-2/
+* Need to impliment DB validations
+* Need to create artifactory for the framework
 
 #### Common framework dependencies
 * Normal Test Run<br>
@@ -141,6 +152,5 @@ Set a global timeout for your tests.<br>
 * Debugging<br>
 **Trace Viewer:**  Use Playwright's Trace Viewer to debug your tests. Trace files are available in the test-results directory.<br>
 **JavaScript Debug Terminal:** Use the JavaScript Debug Terminal in VSCode for step-by-step debugging.<br>
-..................................<br>
-<br>
+
 
