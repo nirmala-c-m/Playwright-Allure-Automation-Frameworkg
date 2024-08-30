@@ -112,45 +112,8 @@ cucumber-html-reporter is more npm trendier than other reporters like allure rep
 
 ## Feature need to add
 * dockerized the framework
-	* https://codefresh.io/blog/not-ignore-dockerignore-2/
+	 https://codefresh.io/blog/not-ignore-dockerignore-2/
 * Need to impliment DB validations
 * Need to create artifactory for the framework
-
-#### Common framework dependencies
-* Normal Test Run<br>
-bash<br>
-Copy code<br>
-npm run test<br>
-
-
-* Test with Allure Reporting<br>
-bash<br>
-Copy code<br>
-npm run :allure<br>
-
-
-* Generate and Open Allure Report<br>
-bash<br>
-Copy code<br>
-npm run testreportandopen:allure<br>
-Test Configuration<br>
-Configurations can be found in the playwright.config.js file. Key configurations include:<br>
-
-* Timeout:<br>
-Set a global timeout for your tests.<br>
- **Parallel Execution:** Enable or disable fully parallel test execution.<br>
- **Retries:**  Configure retry logic for flaky tests.<br>
- **Headless Mode:** Easily toggle headless mode for browsers.<br>
-
- 
-* Test Reporting:<br>
-  The framework uses Allure for test reporting:<br>
-  **Allure Command-Line Tool:** Installed as a dev dependency.<br>
-  **Reports:**  Generated in the allure-results directory after each test run.<br>
-  **HTML Reports:** Automatically generated and stored in the allure-report directory.<br>
-  
-* Debugging<br>
-**Trace Viewer:**  Use Playwright's Trace Viewer to debug your tests. Trace files are available in the test-results directory.<br>
-**JavaScript Debug Terminal:** Use the JavaScript Debug Terminal in VSCode for step-by-step debugging.<br>
 
 
